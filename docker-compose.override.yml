@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+    controller:
+        volumes:
+            - ".:/var/www"
+
+    toolbox:
+        working_dir: "/var/www"
+        volumes_from:
+           - "controller"
+
+        image: "coffeelovers/php:7.0-toolbox"

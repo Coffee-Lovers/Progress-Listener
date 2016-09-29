@@ -1,0 +1,10 @@
+version: '2'
+services:
+    controller:
+        image: "coffeelovers/progress-listener"
+        networks:
+              - main
+networks:
+    main:
+        external:
+            name: "main"
