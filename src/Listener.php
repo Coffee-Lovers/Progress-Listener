@@ -9,8 +9,6 @@
 namespace CL;
 
 use CLLibs\Messaging\CoffeePotProgressMessage;
-use CLLibs\Messaging\Message;
-use CLLibs\Queue\Queue;
 use CLLibs\Messaging\Hub;
 use Psr\Log\LoggerInterface;
 
@@ -24,10 +22,6 @@ class Listener
      * @var LoggerInterface
      */
     private $logger;
-    /**
-     * @var Queue
-     */
-    private $queue;
 
     /**
      * Controller constructor.
@@ -47,7 +41,7 @@ class Listener
     {
         $this->logger->info("Booting up processing");
         $that = $this;
-        $this->messagingHub->subscribe('coffeepot.progress', function ($message) use ($that) {
+        $this->messagingHub->subscribe(CoffeePotProgressMessage::TOPIC, function ($message) use ($that) {
             $that->logger->info("Message {message} received", ["message" => $message]);
         });
     }
